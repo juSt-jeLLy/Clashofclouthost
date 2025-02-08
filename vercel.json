@@ -8,16 +8,8 @@
   ],
   "routes": [
     {
-      "handle": "filesystem"
-    },
-    
-    {
-      "src": "/(routes)/(.*)",
-      "dest": "client/app/(routes)/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "client/$1"
+      "dest": "client/app/(routes)/$1"
     }
   ]
 }

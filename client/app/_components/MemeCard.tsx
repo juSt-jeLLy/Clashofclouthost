@@ -26,7 +26,7 @@ const truncateAddress = (address: string, startLength = 6, endLength = 4): strin
     if (!address) throw new Error("Invalid address");
     if (address.length <= startLength + endLength) return address;
     return `${address.slice(0, startLength)}...${address.slice(-endLength)}`;
-  } catch (error) {
+  } catch {
     toast.error("Invalid address format");
     return "Invalid Address";
   }
@@ -58,21 +58,13 @@ export default function MemeCard({ id, imageUrl, title, creator, stakes, tags }:
   };
 
   const handleStakeClick = () => {
-    try {
-      setIsLoading(true);
-      setIsStakeModalOpen(true);
-    } catch (error) {
-      handleError(error);
-    }
+    setIsLoading(true);
+    setIsStakeModalOpen(true);
   };
 
   const handleBuyClick = () => {
-    try {
-      setIsLoading(true);
-      setIsBuyModalOpen(true);
-    } catch (error) {
-      handleError(error);
-    }
+    setIsLoading(true);
+    setIsBuyModalOpen(true);
   };
 
   async function getOwner() {
@@ -118,9 +110,10 @@ export default function MemeCard({ id, imageUrl, title, creator, stakes, tags }:
     }
   };
 
-  useEffect(() => {
-    getOwner();
-  }, []);
+useEffect(() => {
+  getOwner();
+}, [address, CONTRACT_ADDRESS, PROVIDER_URL, getOwner]);
+
 
   return (
     <>
